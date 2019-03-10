@@ -2,7 +2,7 @@
 
 RANCHER_ACCESS_KEY=A86CB6CA78F908EDBCBF
 RANCHER_SECRET_KEY=az5yvLmkJbTCNxDcsS5KeWTtjL7Nw5gtWjn5rTVT
-RANCHER_URL=http://contabo:8080/v2-beta/projects/1a5
+RANCHER_URL=http://80.241.221.122:8080/v2-beta/projects/1a5
 BASE_DIR=${PWD}
 
 echo "Force pulling..."
