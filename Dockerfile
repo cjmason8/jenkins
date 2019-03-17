@@ -39,4 +39,6 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
  && groupadd -r docker \
 && usermod -aG docker jenkins
 
+COPY rancher-compose /usr/local/bin
+
 USER jenkins
