@@ -1,5 +1,5 @@
 jenkins:
-  image: cjmason8/jenkins:6
+  image: cjmason8/jenkins:7
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /jenkinsHome:/var/jenkins_home
