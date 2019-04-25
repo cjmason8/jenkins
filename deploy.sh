@@ -2,7 +2,11 @@
 
 RANCHER_ACCESS_KEY=$1
 RANCHER_SECRET_KEY=$2
+<<<<<<< HEAD
 RANCHER_URL=$3
+=======
+RANCHER_URL=http://80.241.221.122:8080/v2-beta/projects/1a5
+>>>>>>> b8e3b1ce3686074e6baa5db4b4ef3c8cb49e2290
 BASE_DIR=${PWD}
 
 echo "Force pulling..."

@@ -1,10 +1,11 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:jdk11
 
 USER root
 
 # install prerequisite debian packages
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+     maven \
      apt-transport-https \
      ca-certificates \
      curl \
@@ -37,5 +38,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
  && rm -rf /var/lib/apt/lists/* \
  && groupadd -g 1002 docker \
 && usermod -aG docker jenkins
+
+COPY rancher-compose /usr/local/bin
 
 USER jenkins
