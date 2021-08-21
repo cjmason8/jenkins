@@ -24,7 +24,7 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && gosu nobody true 
 
 # install docker
-ARG DOCKER_CLI_VERSION==5:19.03.15~3-0~debian-stretch
+ARG DOCKER_CLI_VERSION==5:18.09.3~3-0~debian-buster
 # ARG DOCKER_CLI_VERSION=
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
  && add-apt-repository \
@@ -33,11 +33,13 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
      stable" \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    docker-ce-cli \
+    docker-ce-cli${DOCKER_CLI_VERSION} \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && groupadd -g 1002 docker \
-&& usermod -aG docker jenkins
+ && usermod -aG docker jenkins \
+ && mkdir /home/tomcat \
+ && chmod 777 /home/tomcat
 
 COPY rancher-compose /usr/local/bin
 
