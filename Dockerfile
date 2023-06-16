@@ -24,8 +24,6 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && gosu nobody true 
 
 # install docker
-ARG DOCKER_CLI_VERSION==5:18.09.3~3-0~debian-buster
-# ARG DOCKER_CLI_VERSION=
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
  && add-apt-repository \
      "deb [arch=amd64] https://download.docker.com/linux/debian \
@@ -33,7 +31,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
      stable" \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    docker-ce-cli${DOCKER_CLI_VERSION} \
+    docker-ce-cli \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && groupadd -g 1002 docker \
