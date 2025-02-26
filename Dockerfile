@@ -24,7 +24,7 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && gosu nobody true 
 
 # install docker
-RUN apt-get install -m 0755 -d /etc/apt/keyrings \
+RUN install -m 0755 -d /etc/apt/keyrings \
  && curl -fsSL https://download.docker.com/linux/debian/gpg \
  && tee /etc/apt/keyrings/docker.asc > /dev/null \
  && chmod a+r /etc/apt/keyrings/docker.asc
