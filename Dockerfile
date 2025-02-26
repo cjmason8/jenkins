@@ -23,6 +23,8 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && chmod +x /usr/local/bin/gosu \
  && gosu nobody true 
 
+RUN lsb_release -a
+
 # install docker
 RUN install -m 0755 -d /etc/apt/keyrings \
  && curl -fsSL https://download.docker.com/linux/debian/gpg \
