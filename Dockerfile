@@ -7,9 +7,6 @@ RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
      maven \
      apt-transport-https \
-     ca-certificates \
-     curl \
-     gnupg2 \
      software-properties-common \
      vim \
      wget \
@@ -23,16 +20,14 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && chmod +x /usr/local/bin/gosu \
  && gosu nobody true 
 
-RUN lsb_release -a
-
-# install docker
-RUN install -m 0755 -d /etc/apt/keyrings \
- && curl -fsSL https://download.docker.com/linux/debian/gpg \
- && tee /etc/apt/keyrings/docker.asc > /dev/null \
- && chmod a+r /etc/apt/keyrings/docker.asc
-
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
- && tee /etc/apt/sources.list.d/docker.list > /dev/null
+ RUN apt-get update && apt-get install -y \
+ ca-certificates curl gnupg && \
+ mkdir -p /etc/apt/keyrings && \
+ curl -fsSL https://download.docker.com/linux/debian/gpg | tee /etc/apt/keyrings/docker.asc > /dev/null && \
+ chmod a+r /etc/apt/keyrings/docker.asc && \
+ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
+ apt-get update && apt-get install -y docker-ce-cli && \
+ rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
